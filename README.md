@@ -10,7 +10,7 @@ A clear, step-by-step guide to install and use **SonarQube**, focused on code qu
 
 
 ---
-## 📑 Table of Contents
+## Table of Contents
 
 1. [What is SonarQube?](#what-is-sonarqube)
 2. [Why Use SonarQube?](#why-use-sonarqube)
