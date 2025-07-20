@@ -1,4 +1,4 @@
-# 📘 SonarQube Documentation
+#  SonarQube Documentation
 
 A clear, step-by-step guide to install and use **SonarQube**, focused on code quality, security, and DevSecOps best practices.
 
@@ -29,7 +29,7 @@ A clear, step-by-step guide to install and use **SonarQube**, focused on code qu
 
 ---
 
-## 🧭 Scope
+## Scope
 
 This guide covers:
 - Installing SonarQube Community Edition (Linux/Debian/Ubuntu)
@@ -72,10 +72,10 @@ It automatically detects **bugs**, **vulnerabilities**, **code smells**, and **t
 
 ## Disadvantages
 
-- ❌ High memory use (needs 4GB+ RAM)
-- ❌ Advanced features require paid versions
-- ❌ Setup and tuning require effort
-- ❌ Branch/PR features limited in free edition
+-  High memory use (needs 4GB+ RAM)
+-  Advanced features require paid versions
+-  Setup and tuning require effort
+-  Branch/PR features limited in free edition
 
 ---
 
@@ -94,12 +94,12 @@ graph TD
 
 ## Best Practices
 
-- ✅ Define and enforce quality gates
-- ✅ Integrate SonarQube with CI/CD pipelines
-- ✅ Regularly review and address reported issues
-- ✅ Enable pull request decoration (paid version)
-- ✅ Set up alerts for gate failures
-- ✅ Use short-lived branch analysis (Developer+ editions)
+-  Define and enforce quality gates
+-  Integrate SonarQube with CI/CD pipelines
+-  Regularly review and address reported issues
+-  Enable pull request decoration (paid version)
+-  Set up alerts for gate failures
+-  Use short-lived branch analysis (Developer+ editions)
 
 ---
 
