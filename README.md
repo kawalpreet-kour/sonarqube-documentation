@@ -1,195 +1,218 @@
-#  SonarQube Documentation
+# SonarQube Documentation
 
-A clear, step-by-step guide to install and use **SonarQube**, focused on code quality, security, and DevSecOps best practices.
+> This documentation gives a simple and clear overview of **SonarQube**, an open-source tool for code quality inspection.
+
+---
+
+## Author Information
+
+| Created by      | Created on  | Version | Last updated ON | Pre Reviewer |
+|-----------------|------------|---------|-----------------|--------------|
+| Kawalpreet Kour | 18-07-2025 | V 1.0   | 21-07-2025      | Pritam       |
 
 ---
 
-| Authors           | Created on    | Version | Last updated by | Last edited on |
-|-------------------|--------------|---------|-----------------|---------------|
-| Kawalpreet Kour   | 19 July 2025 | v1      | -               | -             |
-
-
----
 ## Table of Contents
 
-1. [What is SonarQube?](#what-is-sonarqube)
-2. [Why Use SonarQube?](#why-use-sonarqube)
-3. [Advantages](#advantages)
-4. [Disadvantages](#disadvantages)
-5. [Typical Workflow](#typical-workflow)
-6. [Best Practices](#best-practices)
-7. [Installation & Configuration Guide](#installation--configuration-guide)
-    - [Prerequisites](#prerequisites)
-    - [Installation Steps (Debian/Ubuntu)](#installation-steps-debianubuntu)
-    - [Running Analysis](#running-analysis)
-8. [SonarQube Editions](#sonarqube-editions)
-9. [Conclusion](#conclusion)
-10. [Contact](#contact)
-11. [References](#references)
+1. [Purpose](#1-purpose)
+2. [Scope](#2-scope)
+3. [Prerequisites](#3-prerequisites)
+4. [What is SonarQube?](#4-what-is-sonarqube)
+5. [What SonarQube Does](#5-what-sonarqube-does)
+6. [History & Background](#6-history--background)
+7. [Architecture](#7-architecture)
+8. [Workflow](#8-workflow)
+9. [Key Features](#9-key-features)
+10. [Benefits](#10-benefits)
+11. [Limitations](#11-limitations)
+12. [SonarQube Editions](#12-sonarqube-editions)
+13. [Alternative Tools](#13-alternative-tools)
+14. [Why SonarQube is Best](#14-why-sonarqube-is-best)
+15. [Best Practices](#15-best-practices)
+16. [FAQs](#16-faqs)
+17. [Conclusion](#17-conclusion)
+18. [References](#18-references)
+19. [Contact Information](#19-contact-information)
 
 ---
 
-## Scope
+## 1. Purpose
+To give a clear understanding of SonarQube, its main features, how it works, and why you should use it for code quality.
 
-This guide covers:
-- Installing SonarQube Community Edition (Linux/Debian/Ubuntu)
-- Configuring SonarQube for your team/project
-- Analyzing backend/frontend code quality
-- Integrating with CI/CD (Jenkins, GitHub Actions)
-- Enforcing quality gates & code standards (including OWASP)
+## 2. Scope
+Useful for developers, DevOps engineers, and QA teams working on software development.
 
 ---
 
-## What is SonarQube?
+## 3. Prerequisites
 
-SonarQube is an open-source platform by SonarSource for **continuous code quality inspection**.  
-It automatically detects **bugs**, **vulnerabilities**, **code smells**, and **technical debt** across 25+ languages.
-
----
-
-## Why Use SonarQube?
-
-| Benefit                  | Explanation                                                      |
-|--------------------------|------------------------------------------------------------------|
-| Improve Code Quality     | Enforces clean, efficient coding practices                       |
-| Catch Bugs Early         | Detects issues before production                                 |
-| Secure Code              | Highlights security flaws (OWASP/CWE)                            |
-| CI/CD Integration        | Works seamlessly with Jenkins, GitHub Actions, etc.              |
-| Team Collaboration       | Tracks ownership and transparency of code issues                 |
-| Reduce Technical Debt    | Measures and reports "cleanup" effort                            |
+> - Java Installed  
+> - Minimum Hardware Requirements  
+> - Supported Database (e.g., PostgreSQL)  
+> - Web Browser (Chrome/Firefox)  
 
 ---
 
-## Advantages
+## 4. What is SonarQube?
+- Open-source tool for code quality inspection
+- Supports 25+ languages (Java, Python, Go, etc.)
+- Checks code coverage, duplication, bugs, security risks
+- Works with CI/CD pipelines
 
-- ✔ Free Community Edition
-- ✔ Multi-language (Java, Python, JS, etc.)
-- ✔ Web dashboard & code coverage tracking
-- ✔ Customizable rules & quality gates
-- ✔ Easy integration with build tools (Maven, Gradle)
+## 5. What SonarQube Does
+- Analyzes code without running it (static analysis)
+- Enforces coding standards
+- Gives dashboards for code health
+- Finds bugs, vulnerabilities, and code smells
+- Suggests improvements
+
+## 6. History & Background
+- Made in Java
+- Started by SonarSource in 2007
+- Was called "Sonar" first
+- Built for "Continuous Inspection"
+- Uses plugins for more features
 
 ---
 
-## Disadvantages
+## 7. Architecture
 
--  High memory use (needs 4GB+ RAM)
--  Advanced features require paid versions
--  Setup and tuning require effort
--  Branch/PR features limited in free edition
+SonarQube architecture contains these main components:
+
+- **Source Code**: Your project files (Java, C++, etc.)
+- **Scanner**: Runs through command line, build tools (Maven/Gradle), or CI/CD (Jenkins, etc.) to scan the source code.
+- **SonarQube Server**: Contains:
+    - **Compute Engine**: Processes scan results.
+    - **Webserver**: Displays results and dashboards.
+    - **Search Server (Elasticsearch)**: Stores and searches data.
+- **Database**: Stores all reports, snapshots, and configurations.
+
+![image1](image1)
 
 ---
 
-## Typical Workflow
+## 8. Workflow
+
+Below is a simple workflow diagram for SonarQube usage:
 
 ```mermaid
 graph TD
-    A[Developer Pushes Code] --> B[CI Tool: Jenkins/Maven/GitHub Action]
-    B --> C[Sonar Scanner Runs]
-    C --> D[SonarQube Server Analysis]
-    D --> E[Dashboard Report: Bugs/Smells/Vulnerabilities]
-    E --> F[Quality Gate Passed/Failed]
+    A[Write Code] --> B[Run SonarQube Scanner]
+    B --> C[Send Report to SonarQube Server]
+    C --> D[Compute Engine Analyzes Data]
+    D --> E[Store Results in Database]
+    E --> F[View Results on Web Dashboard]
+    F --> G[Fix Issues in Code]
+    G --> B
 ```
 
----
-
-## Best Practices
-
--  Define and enforce quality gates
--  Integrate SonarQube with CI/CD pipelines
--  Regularly review and address reported issues
--  Enable pull request decoration (paid version)
--  Set up alerts for gate failures
--  Use short-lived branch analysis (Developer+ editions)
+**Workflow Steps:**
+1. **Write Code:** Developers write code in any supported language.
+2. **Run SonarQube Scanner:** Use CLI, Maven/Gradle, Jenkins, etc. to scan the code.
+3. **Send Report to SonarQube Server:** Scanner sends analysis data to SonarQube server.
+4. **Compute Engine Analyzes Data:** The compute engine processes the scan results.
+5. **Store Results in Database:** All reports and metrics are stored.
+6. **View Results on Web Dashboard:** Developers/teams review issues and metrics.
+7. **Fix Issues in Code:** Developers resolve issues and repeat the workflow.
 
 ---
 
-## Installation & Configuration Guide
+## 9. Key Features
+- **Quality Profiles:** Set rules for scanning
+- **Metrics:** Coverage, complexity, duplication
+- **Static Code Analysis:** No need to run code
+- **Quality Gates:** Pass/Fail based on set limits
 
-### Prerequisites
+## 10. Benefits
+- Makes code better and cleaner
+- Finds problems early
+- Reduces future code issues (technical debt)
+- Works well with CI/CD tools
+- Supports many languages
 
-- Operating System: Ubuntu/Debian (Linux)
-- Java 17+ installed (`sudo apt install openjdk-17-jdk`)
-- RAM: Minimum 4GB (8GB+ recommended)
-- Database: PostgreSQL/MySQL (recommended for production)
-- Optional: Docker
+## 11. Limitations
+- Setup can be tough for beginners
+- Does not find runtime errors
+- Sometimes shows false positives
+- Uses a lot of system resources
 
----
-
-### Installation Steps (Debian/Ubuntu)
-
-```bash
-# 1. Install Java 17 (if not already)
-sudo apt update
-sudo apt install openjdk-17-jdk
-
-# 2. Download SonarQube (replace <version> with latest, e.g., 10.4.1)
-wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-<version>.zip
-
-# 3. Unzip
-unzip sonarqube-<version>.zip
-cd sonarqube-<version>/bin/linux-x86-64/
-
-# 4. Start SonarQube server
-./sonar.sh start
-
-# 5. Access the Web UI
-# Open: http://localhost:9000 (Default login: admin / admin)
-
-# 6. (Optional) Set up PostgreSQL/MySQL and configure conf/sonar.properties
-```
+## 12. SonarQube Editions
+- **Community Edition** – Free and open-source
+- **Enterprise Edition** – Paid, has extra features
 
 ---
 
-### Running Analysis
+## 13. Alternative Tools
 
-```bash
-# 1. Install SonarScanner (CLI)
-# Download from https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/
-# Or, on Ubuntu:
-sudo apt install unzip
-wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-<version>-linux.zip
-unzip sonar-scanner-cli-<version>-linux.zip
-export PATH=$PATH:$(pwd)/sonar-scanner-<version>-linux/bin
-
-# 2. Run analysis (from project root)
-sonar-scanner \
-  -Dsonar.projectKey=my_project \
-  -Dsonar.sources=. \
-  -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=<your_token>
-```
+Some popular alternatives to SonarQube:
+- **Veracode:** Focuses more on security, SAST, not free.
+- **Checkmarx:** Security scanning for code, paid.
+- **Codacy:** Code quality and coverage, supports many languages, SaaS.
+- **Coverity:** Static analysis, paid, strong in security.
+- **ESLint:** JavaScript/TypeScript linting (language-specific).
+- **PMD:** Java static analysis.
+- **FindBugs/SpotBugs:** Java static analysis.
+- **Fortify:** Enterprise security scanning.
+- **DeepSource:** Automated code review, multi-language.
+- **Snyk:** Security scanning, open source vulnerabilities.
+- **CodeClimate:** Automated code review and test coverage.
 
 ---
 
-## SonarQube Editions
+## 14. Why SonarQube is Best
 
-| Edition       | Features                                           |
-|---------------|----------------------------------------------------|
-| Community     | Free, basic analysis                              |
-| Developer     | Adds branch & PR analysis                         |
-| Enterprise    | Governance, portfolios, multi-project dashboards  |
-| Data Center   | High availability, clustering support             |
-
----
-
-## Conclusion
-
-**SonarQube** streamlines code quality and security for teams.  
-It catches issues early, integrates with DevOps pipelines, and supports long-term technical health.
+- **Comprehensive Language Support:** 25+ languages, not limited to one ecosystem.
+- **Integration:** Works with all major CI/CD tools (Jenkins, GitHub Actions, GitLab, Bitbucket, etc.).
+- **Open Source:** Free Community Edition, active community, widely adopted.
+- **Quality Gates:** Enforces minimum standards before merging code.
+- **Customizable:** Rules, profiles, plugins, and dashboards can be tailored.
+- **Developer Friendly:** Easy to use UI, actionable feedback, and clear dashboards.
+- **Extensible:** Plugin-based, integrates with other tools and IDEs.
+- **Continuous Inspection:** Designed for constant feedback, not just one-off scans.
+- **Active Development:** Regular updates, strong support from SonarSource.
+- **Good Documentation:** Rich official and community resources.
 
 ---
 
-## Contact
+## 15. Best Practices
+- Scan code early and regularly
+- Pay attention to new code first
+- Tweak quality profiles for different languages
+- Always check quality gates
+- Use with CI/CD like Jenkins
+
+---
+
+## 16. FAQs
+
+**Q. What is SonarQube used for?**  
+To check code quality and find issues before release.
+
+**Q. Can SonarQube be integrated with CI/CD tools?**  
+Yes, with Jenkins, GitLab, GitHub Actions, etc.
+
+**Q. Is SonarQube free to use?**  
+Community Edition is free. Enterprise Edition costs money.
+
+---
+
+## 17. Conclusion
+SonarQube helps make sure your code is good, catches problems early, and fits well into software development workflows.
+
+---
+
+## 18. References
+
+> - [SonarQube Fundamental Tutorial](https://youtu.be/UjCVCvdI73w?si=642Ocb0Ayo8tgNJV)  
+> - [SonarQube Complete](https://youtu.be/r2UVTDpIUj8?si=WX7VgI1IBx-HbkGx)  
+> - [Official SonarQube Documentation](https://docs.sonarqube.org/latest/)  
+
+---
+
+## 19. Contact Information
 
 | Name             | Email                                         |
 |------------------|-----------------------------------------------|
 | Kawalpreet Kour  | Kawalpreet.kour.snaatak@mygurukulam.co        |
 
 ---
-
-## References
-
-- [SonarQube Docs](https://docs.sonarsource.com/sonarqube/latest/)
-- [SonarScanner Setup](https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/)
-- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
-- [SonarQube GitHub](https://github.com/SonarSource/sonarqube)
