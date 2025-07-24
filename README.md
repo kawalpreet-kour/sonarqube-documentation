@@ -1,218 +1,147 @@
 # SonarQube Documentation
 
-> This documentation gives a simple and clear overview of **SonarQube**, an open-source tool for code quality inspection.
+> This documentation is intended as a practical guide for teams implementing SonarQube in real-world software development environments.
+
+<img width="312" height="162" alt="sonarqube" src="https://github.com/user-attachments/assets/10d2cbcf-9afc-4439-a767-26d5c3cbf187" />
+
 
 ---
 
 ## Author Information
 
 | Created by      | Created on  | Version | Last updated ON | Pre Reviewer |
-|-----------------|------------|---------|-----------------|--------------|
-| Kawalpreet Kour | 18-07-2025 | V 1.0   | 21-07-2025      | Pritam       |
+|-----------------|-------------|---------|------------------|---------------|
+| Kawalpreet Kour | 18-07-2025  | V 1.0   | 21-07-2025       | Pritam        |
 
 ---
 
 ## Table of Contents
 
-1. [Purpose](#1-purpose)
-2. [Scope](#2-scope)
-3. [Prerequisites](#3-prerequisites)
-4. [What is SonarQube?](#4-what-is-sonarqube)
-5. [What SonarQube Does](#5-what-sonarqube-does)
-6. [History & Background](#6-history--background)
-7. [Architecture](#7-architecture)
-8. [Workflow](#8-workflow)
-9. [Key Features](#9-key-features)
-10. [Benefits](#10-benefits)
-11. [Limitations](#11-limitations)
-12. [SonarQube Editions](#12-sonarqube-editions)
-13. [Alternative Tools](#13-alternative-tools)
-14. [Why SonarQube is Best](#14-why-sonarqube-is-best)
-15. [Best Practices](#15-best-practices)
-16. [FAQs](#16-faqs)
-17. [Conclusion](#17-conclusion)
-18. [References](#18-references)
-19. [Contact Information](#19-contact-information)
+- [Introduction to SonarQube](#introduction-to-sonarqube)
+- [Why Use SonarQube](#why-use-sonarqube)
+- [Advantages and Disadvantages](#advantages-and-disadvantages)
+  - [Advantages](#advantages)
+  - [Disadvantages](#disadvantages)
+- [SonarQube Workflow](#sonarqube-workflow)
+- [Best Practices](#best-practices)
+- [FAQs](#faqs)
+- [Conclusion](#conclusion)
+- [Contact Information](#contact-information)
+- [References](#references)
 
 ---
 
-## 1. Purpose
-To give a clear understanding of SonarQube, its main features, how it works, and why you should use it for code quality.
+## Introduction to SonarQube
 
-## 2. Scope
-Useful for developers, DevOps engineers, and QA teams working on software development.
+SonarQube is an open-source platform for continuous inspection of code quality. It performs automated static analysis across 25+ programming languages to detect:
 
----
+- Bugs  
+- Code Smells  
+- Vulnerabilities  
+- Duplicate Code  
+- Non-compliance with coding standards
 
-## 3. Prerequisites
-
-> - Java Installed  
-> - Minimum Hardware Requirements  
-> - Supported Database (e.g., PostgreSQL)  
-> - Web Browser (Chrome/Firefox)  
+It integrates seamlessly with version control and CI/CD systems, making quality checks part of every build.
 
 ---
 
-## 4. What is SonarQube?
-- Open-source tool for code quality inspection
-- Supports 25+ languages (Java, Python, Go, etc.)
-- Checks code coverage, duplication, bugs, security risks
-- Works with CI/CD pipelines
+## Why Use SonarQube
 
-## 5. What SonarQube Does
-- Analyzes code without running it (static analysis)
-- Enforces coding standards
-- Gives dashboards for code health
-- Finds bugs, vulnerabilities, and code smells
-- Suggests improvements
-
-## 6. History & Background
-- Made in Java
-- Started by SonarSource in 2007
-- Was called "Sonar" first
-- Built for "Continuous Inspection"
-- Uses plugins for more features
+- Ensures **early detection** of issues before production  
+- Promotes **clean coding practices** across teams  
+- Provides **real-time feedback** through dashboards  
+- Helps enforce **compliance and security standards**  
+- Monitors **technical debt trends** over time  
+- Offers **customizable rule sets** for diverse projects and languages
 
 ---
 
-## 7. Architecture
+## Advantages and Disadvantages
 
-SonarQube architecture contains these main components:
+### Advantages
 
-- **Source Code**: Your project files (Java, C++, etc.)
-- **Scanner**: Runs through command line, build tools (Maven/Gradle), or CI/CD (Jenkins, etc.) to scan the source code.
-- **SonarQube Server**: Contains:
-    - **Compute Engine**: Processes scan results.
-    - **Webserver**: Displays results and dashboards.
-    - **Search Server (Elasticsearch)**: Stores and searches data.
-- **Database**: Stores all reports, snapshots, and configurations.
+- Easy integration with major CI/CD tools (Jenkins, GitHub Actions, GitLab, Azure DevOps)  
+- Clear dashboards with actionable issue descriptions  
+- Quality Gates help block unstable code from merging  
+- Plugin ecosystem allows language and feature extensibility  
+- Community Edition is free and actively maintained
 
-![image1](image1)
+### Disadvantages
 
----
-
-## 8. Workflow
-
-Below is a simple workflow diagram for SonarQube usage:
-
-```mermaid
-graph TD
-    A[Write Code] --> B[Run SonarQube Scanner]
-    B --> C[Send Report to SonarQube Server]
-    C --> D[Compute Engine Analyzes Data]
-    D --> E[Store Results in Database]
-    E --> F[View Results on Web Dashboard]
-    F --> G[Fix Issues in Code]
-    G --> B
-```
-
-**Workflow Steps:**
-1. **Write Code:** Developers write code in any supported language.
-2. **Run SonarQube Scanner:** Use CLI, Maven/Gradle, Jenkins, etc. to scan the code.
-3. **Send Report to SonarQube Server:** Scanner sends analysis data to SonarQube server.
-4. **Compute Engine Analyzes Data:** The compute engine processes the scan results.
-5. **Store Results in Database:** All reports and metrics are stored.
-6. **View Results on Web Dashboard:** Developers/teams review issues and metrics.
-7. **Fix Issues in Code:** Developers resolve issues and repeat the workflow.
+- Does not support runtime or dynamic analysis  
+- False positives can occur without fine-tuned Quality Profiles  
+- Large codebases may require more resources and time  
+- Initial setup may be overwhelming for beginners  
+- Requires some developer training to interpret results effectively
 
 ---
 
-## 9. Key Features
-- **Quality Profiles:** Set rules for scanning
-- **Metrics:** Coverage, complexity, duplication
-- **Static Code Analysis:** No need to run code
-- **Quality Gates:** Pass/Fail based on set limits
+## SonarQube Workflow
 
-## 10. Benefits
-- Makes code better and cleaner
-- Finds problems early
-- Reduces future code issues (technical debt)
-- Works well with CI/CD tools
-- Supports many languages
-
-## 11. Limitations
-- Setup can be tough for beginners
-- Does not find runtime errors
-- Sometimes shows false positives
-- Uses a lot of system resources
-
-## 12. SonarQube Editions
-- **Community Edition** – Free and open-source
-- **Enterprise Edition** – Paid, has extra features
+1. Developers write or modify code  
+2. Code changes are committed/pushed to version control  
+3. CI pipeline triggers the SonarQube scanner  
+4. Scanner analyzes code and sends report to SonarQube server  
+5. Compute Engine evaluates against configured rule sets  
+6. Results are stored in the database  
+7. Dashboard displays issues and metrics for review  
+8. Developers resolve issues and rescan until Quality Gate passes
 
 ---
 
-## 13. Alternative Tools
+### Quick Summary
 
-Some popular alternatives to SonarQube:
-- **Veracode:** Focuses more on security, SAST, not free.
-- **Checkmarx:** Security scanning for code, paid.
-- **Codacy:** Code quality and coverage, supports many languages, SaaS.
-- **Coverity:** Static analysis, paid, strong in security.
-- **ESLint:** JavaScript/TypeScript linting (language-specific).
-- **PMD:** Java static analysis.
-- **FindBugs/SpotBugs:** Java static analysis.
-- **Fortify:** Enterprise security scanning.
-- **DeepSource:** Automated code review, multi-language.
-- **Snyk:** Security scanning, open source vulnerabilities.
-- **CodeClimate:** Automated code review and test coverage.
+> **Code Commit** → **CI/CD Trigger** → **Sonar Scanner Execution** → **Analysis Report Generated** → **Results Stored & Displayed** → **Developer Fixes** → **Rescan & Validate**
 
 ---
 
-## 14. Why SonarQube is Best
+## Best Practices
 
-- **Comprehensive Language Support:** 25+ languages, not limited to one ecosystem.
-- **Integration:** Works with all major CI/CD tools (Jenkins, GitHub Actions, GitLab, Bitbucket, etc.).
-- **Open Source:** Free Community Edition, active community, widely adopted.
-- **Quality Gates:** Enforces minimum standards before merging code.
-- **Customizable:** Rules, profiles, plugins, and dashboards can be tailored.
-- **Developer Friendly:** Easy to use UI, actionable feedback, and clear dashboards.
-- **Extensible:** Plugin-based, integrates with other tools and IDEs.
-- **Continuous Inspection:** Designed for constant feedback, not just one-off scans.
-- **Active Development:** Regular updates, strong support from SonarSource.
-- **Good Documentation:** Rich official and community resources.
+- Integrate SonarQube early in the development lifecycle  
+- Focus on new/modified code during issue resolution  
+- Review dashboards during daily standups or code reviews  
+- Update Quality Profiles as coding standards evolve  
+- Avoid blindly suppressing issues without proper justification  
+- Keep SonarQube and all its plugins up to date
 
 ---
 
-## 15. Best Practices
-- Scan code early and regularly
-- Pay attention to new code first
-- Tweak quality profiles for different languages
-- Always check quality gates
-- Use with CI/CD like Jenkins
+## FAQs
+
+- **Does SonarQube catch runtime errors?**  
+  No. It performs only static analysis.
+
+- **Is SonarQube free?**  
+  Yes, the Community Edition is free. Enterprise tiers offer advanced features.
+
+- **Can I use it with GitHub/Jenkins?**  
+  Definitely — it integrates with most CI/CD tools.
+
+- **What kinds of issues does it detect?**  
+  Bugs, security vulnerabilities, code smells, duplication, and poor maintainability.
 
 ---
 
-## 16. FAQs
+## Conclusion
 
-**Q. What is SonarQube used for?**  
-To check code quality and find issues before release.
-
-**Q. Can SonarQube be integrated with CI/CD tools?**  
-Yes, with Jenkins, GitLab, GitHub Actions, etc.
-
-**Q. Is SonarQube free to use?**  
-Community Edition is free. Enterprise Edition costs money.
+SonarQube transforms quality assurance into a proactive and automated process. By embedding code analysis directly into the CI/CD workflow, it empowers development teams to catch defects early, maintain consistent standards, and reduce long-term technical debt. Its visual insights, customizable rules, and flexible integration make it a vital component of any modern software engineering setup.
 
 ---
 
-## 17. Conclusion
-SonarQube helps make sure your code is good, catches problems early, and fits well into software development workflows.
-
----
-
-## 18. References
-
-> - [SonarQube Fundamental Tutorial](https://youtu.be/UjCVCvdI73w?si=642Ocb0Ayo8tgNJV)  
-> - [SonarQube Complete](https://youtu.be/r2UVTDpIUj8?si=WX7VgI1IBx-HbkGx)  
-> - [Official SonarQube Documentation](https://docs.sonarqube.org/latest/)  
-
----
-
-## 19. Contact Information
+## Contact Information
 
 | Name             | Email                                         |
 |------------------|-----------------------------------------------|
 | Kawalpreet Kour  | Kawalpreet.kour.snaatak@mygurukulam.co        |
 
 ---
+
+## References
+
+| Link | Description |
+|------|-------------|
+| [SonarQube Documentation](https://docs.sonarqube.org/latest/) | Official SonarQube user guide |
+| [YouTube: Beginner Tutorial](https://youtu.be/UjCVCvdI73w?si=642Ocb0Ayo8tgNJV) | Getting started with SonarQube |
+| [YouTube: Advanced Workflow](https://youtu.be/r2UVTDpIUj8?si=WX7VgI1IBx-HbkGx) | CI/CD integration walkthrough |
+| [GitHub Repo](https://github.com/SonarSource/sonarqube) | Source code and latest releases |
+
