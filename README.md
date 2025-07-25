@@ -24,7 +24,6 @@
   - [Disadvantages](#disadvantages)
 - [SonarQube Workflow](#sonarqube-workflow)
 - [Best Practices](#best-practices)
-- [FAQs](#faqs)
 - [Conclusion](#conclusion)
 - [Contact Information](#contact-information)
 - [References](#references)
