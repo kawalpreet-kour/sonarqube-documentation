@@ -4,14 +4,14 @@
 
 <img width="312" height="162" alt="sonarqube" src="https://github.com/user-attachments/assets/10d2cbcf-9afc-4439-a767-26d5c3cbf187" />
 
-
 ---
-
 ## Author Information
-
-| Created by      | Created on  | Version | Last updated ON | Pre Reviewer |
-|-----------------|-------------|---------|------------------|---------------|
-| Kawalpreet Kour | 18-07-2025  | V 1.0   | 21-07-2025       | Pritam        |
+| Last Updated On | Version | Author           | Level           | Reviewer               |
+|-----------------|---------|------------------|-----------------|------------------------|
+| 18-07-2025      | V1.0    | Kawalpreet Kour  | Internal Review | Pritam                 |
+| 25-07-2025      | V1.1    | Kawalpreet Kour  | L0              | Shreya/Sharvani        |
+|                 |         | Kawalpreet Kour  | L1              | Abhishek V             |
+|                 |         | Kawalpreet Kour  | L2              | Abhishek Dubey/Rishabh sharma |
 
 ---
 
@@ -78,50 +78,34 @@ It integrates seamlessly with version control and CI/CD systems, making quality 
 
 ## SonarQube Workflow
 
-1. Developers write or modify code  
-2. Code changes are committed/pushed to version control  
-3. CI pipeline triggers the SonarQube scanner  
-4. Scanner analyzes code and sends report to SonarQube server  
-5. Compute Engine evaluates against configured rule sets  
-6. Results are stored in the database  
-7. Dashboard displays issues and metrics for review  
-8. Developers resolve issues and rescan until Quality Gate passes
+This table explains each step of the integrated workflow for code quality analysis using GitHub, Jenkins, and SonarQube.
 
----
+| **Step**                       | **Description**                                                                                                                                     |
+|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **1. Code Commit by Developer**| The developer writes code and commits it to GitHub (or another version control system). This triggers a **webhook** to notify Jenkins automatically. |
+| **2. CI/CD Pipeline Execution (Jenkins)** | Jenkins checks out the committed code from GitHub. It then performs **build**, **unit tests**, and runs the **SonarQube analysis** using Sonar Scanner. |
+| **3. Code Quality Analysis (SonarQube)** | The Sonar Scanner checks the code for **Bugs**, **Vulnerabilities**, **Code Smells**, and **Code Coverage**, then uploads results to the SonarQube server. |
+| **4. View Report in SonarQube Dashboard** | The analysis report appears in the **SonarQube dashboard**, showing quality metrics. **Quality Gates** help determine if code meets standards.          |
+| **5. Notification to Developer** | Based on the report, a notification is sent to the developer via **Jenkins console**, **email**, or **GitHub status checks**. Pipeline can fail if quality gate fails. |
 
-### Quick Summary
-
-> **Code Commit** → **CI/CD Trigger** → **Sonar Scanner Execution** → **Analysis Report Generated** → **Results Stored & Displayed** → **Developer Fixes** → **Rescan & Validate**
+<img width="1209" height="534" alt="Untitled-2025-07-24-21" src="https://github.com/user-attachments/assets/91563406-8d51-4c14-9f4e-ea802265c385" />
 
 ---
 
 ## Best Practices
 
-- Integrate SonarQube early in the development lifecycle  
-- Focus on new/modified code during issue resolution  
-- Review dashboards during daily standups or code reviews  
-- Update Quality Profiles as coding standards evolve  
-- Avoid blindly suppressing issues without proper justification  
-- Keep SonarQube and all its plugins up to date
+
+
+| **Practice** | **Description** |
+|--------------|-----------------|
+| **Integrate Early** | Integrate SonarQube as early as possible in the development lifecycle to catch issues from the start. |
+| **Focus on New Code** | Prioritize fixing issues in new or modified code instead of old legacy code. |
+| **Use Dashboards** | Regularly review SonarQube dashboards during daily standups and code reviews to stay updated. |
+| **Update Quality Profiles** | Modify and update Quality Profiles as coding standards and team requirements evolve. |
+| **Avoid Blind Suppression** | Do not suppress code issues unless there is a valid and documented justification. |
+| **Stay Updated** | Keep SonarQube and its plugins regularly updated to use the latest features and security patches. |
 
 ---
-
-## FAQs
-
-- **Does SonarQube catch runtime errors?**  
-  No. It performs only static analysis.
-
-- **Is SonarQube free?**  
-  Yes, the Community Edition is free. Enterprise tiers offer advanced features.
-
-- **Can I use it with GitHub/Jenkins?**  
-  Definitely — it integrates with most CI/CD tools.
-
-- **What kinds of issues does it detect?**  
-  Bugs, security vulnerabilities, code smells, duplication, and poor maintainability.
-
----
-
 ## Conclusion
 
 SonarQube transforms quality assurance into a proactive and automated process. By embedding code analysis directly into the CI/CD workflow, it empowers development teams to catch defects early, maintain consistent standards, and reduce long-term technical debt. Its visual insights, customizable rules, and flexible integration make it a vital component of any modern software engineering setup.
